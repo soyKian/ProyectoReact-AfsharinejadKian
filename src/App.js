@@ -1,9 +1,15 @@
+import Navbar from "./Components/Navbar/Navbar"
+import Footer from "./Components/Footer/Footer"
+import ItemListContainer from "./Components/ItemListContainer/ItemListContainer"
+
 
 function App() {
   return (
-
-    <h1> Prueba </h1>
-
+    <div>
+      <Navbar />
+      <ItemListContainer greeting={"Prueba, Hola :)"}/>
+      <Footer />
+    </div>
   );
 }
 
