@@ -31,7 +31,7 @@ const Item = ({element}) => {
       <CardActions>
         <Link to={`/item/${element.id}`} style={{textDecoration: "none", color:"inherit"}}>
         <Button size="small" color="primary">
-          Share
+          Detalles del producto
         </Button>
         </Link>
       </CardActions>
