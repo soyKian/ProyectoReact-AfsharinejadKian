@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import FormCheckout from "../FormCheckout/FormCheckout";
 
 const Cart = () => {
-  const { cart, clearCart, getTotalPrice, deleteProductById } =
-    useContext(CartContext);
+  const { cart, clearCart, getTotalPrice, deleteProductById } = useContext(CartContext);
   const precioTotal = getTotalPrice();
 
   
@@ -47,9 +46,10 @@ const Cart = () => {
     <div>
       {!showForm ? (
         <div>
+        <div>
         {cart.map((elemento) => {
           return (
-            <div>
+            <div key={elemento.id}>
               <h2>{elemento.title}</h2>
               <h2>{elemento.price}</h2>
               <h2>{elemento.quantity}</h2>
@@ -61,6 +61,7 @@ const Cart = () => {
           );
         })
       }
+      </div>
       <div>
         <h3>El precio total del carrito es: AR${precioTotal}</h3>
   
@@ -78,6 +79,7 @@ const Cart = () => {
       }
     </div>
   );
+
 
 };
 
