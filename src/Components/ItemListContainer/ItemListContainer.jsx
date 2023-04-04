@@ -1,32 +1,38 @@
 import { useState, useEffect } from "react";
-import { products } from "../../productsMock";
 import { useParams } from "react-router-dom";
 import ItemList from "../ItemList/ItemList";
 import { CircularProgress } from "@mui/material";
+import { db } from "../../firebaseConfig";
+import{collection, getDocs, query, where} from "firebase/firestore"
 
 const ItemListContainer = () => {
   const { categoryName } = useParams();
 
   const [items, setItems] = useState([]);
 
-  const productosFiltrados = products.filter(
-    (elemento) => elemento.category === categoryName
-  );
 
   useEffect(() => {
-    const productList = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(categoryName ? productosFiltrados : products);
-      }, 2000);
-    });
+    const itemsCollection = collection (db, "products")
 
-    productList
-      .then((res) => {
-        setItems(res);
+    let consulta=undefined;
+
+    if(categoryName){
+      const q = query(itemsCollection, where("category", "==", categoryName));
+      consulta = getDocs(q);
+    }else{
+      consulta = getDocs(itemsCollection);
+    }
+    
+    consulta.then((res) =>{
+      let products = res.docs.map((product)=>{
+        return {
+          ...product.data(),
+          id: product.id
+        }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+
+      setItems(products)
+    })
   }, [categoryName]);
 
   if (items.length === 0) {
