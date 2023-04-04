@@ -1,10 +1,11 @@
 import React from "react";
 import ItemCount from "../ItemCount/ItemCount";
+
 const ItemDetail = ({ productSelected, onAdd, quantity }) => {
   return (
     <div className={"containerItemDetail"}>
       <div className={"containerImage"}>
-        <img src={productSelected.img} alt="" />
+        <img style={{ width: 400 }}  src={productSelected.img} alt="" />
       </div>
 
       <div className={"containerDetail"}>
@@ -18,7 +19,7 @@ const ItemDetail = ({ productSelected, onAdd, quantity }) => {
         </h2>
         <h2 style={{ fontFamily: "monospace" }}>
           <span style={{ fontSize: "23px" }}>Precio:</span> $
-          {productSelected.price}.-
+          {productSelected.price}
         </h2>
 
         <ItemCount

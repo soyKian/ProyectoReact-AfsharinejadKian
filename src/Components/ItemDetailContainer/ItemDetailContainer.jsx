@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ItemCount from "../ItemCount/ItemCount";
 import { CartContext } from "../../Context/CartContext";
 import Swal from "sweetalert2";
 import { getDoc, collection, doc } from "firebase/firestore";
@@ -54,15 +53,11 @@ const ItemDetailContainer = () => {
         marginTop: 15,
       }}
     >
-      <img style={{ width: 400 }} src={productSelected.img}></img>
-      <h1>{productSelected.title}</h1>
-      <h1>{productSelected.description}</h1>
-      <h1>AR${productSelected.price}</h1>
 
-      <ItemCount
-        stock={productSelected.stock}
+      <ItemDetail
+        productSelected={productSelected}
         onAdd={onAdd}
-        initial={quantity}
+        quantity={quantity}
       />
     </div>
   );
