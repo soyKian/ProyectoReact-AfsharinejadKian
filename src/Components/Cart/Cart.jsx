@@ -5,6 +5,21 @@ import { Link } from "react-router-dom";
 
 import FormCheckout from "../FormCheckout/FormCheckout";
 
+import { Button } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
+
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
+
+
 const Cart = () => {
   const { cart, clearCart, getTotalPrice, deleteProductById } = useContext(CartContext);
   const precioTotal = getTotalPrice();
@@ -33,42 +48,86 @@ const Cart = () => {
 
   if(orderId){
     return (
-      <div>
+      <div style={{display:"flex", flexDirection:"column", transform: "translate(0px, 50%)", textAlign:"center"}}>
         <h2>Gracias por su compra</h2>
-        <h4>el comprobante es : {orderId}</h4>
-        <Link to="/"><button>Seguir comprando</button></Link>
+        <h4>El comprobante de su compra:</h4>
+        <h4>Orden de compra "{orderId}"</h4>
+        <Link to="/" style={{textDecoration: "none"}}><Button style={{backgroundColor: "#21b6ae", marginTop:"20px"}} variant="contained" size="medium">Seguir comprando</Button></Link>
       </div>
     )
   }
 
 
   return (
-    <div>
+    <div style={{display:"flex",
+    justifyContent:"center"}}>
+
+
+
+
       {!showForm ? (
         <div>
         <div>
         {cart.map((elemento) => {
           return (
-            <div key={elemento.id}>
-              <h2>{elemento.title}</h2>
-              <h2>{elemento.price}</h2>
-              <h2>{elemento.quantity}</h2>
-              <button onClick={() => deleteProductById(elemento.id)}>
-                {" "}
-                Eliminar{" "}
-              </button>
+      
+
+            <div style={{paddingTop:"20px"}}key={elemento.id}>
+              <Paper
+      sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+        backgroundColor: '#3B8686'
+      }}
+    >
+      <Grid container spacing={2}>
+        <Grid item>
+          <ButtonBase sx={{ width: 128, height: 128 }}>
+            <Img alt={elemento.title} src={elemento.img}/>
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={12} sm container>
+          <Grid item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography gutterBottom variant="h6" component="div" color="white">
+                {elemento.title}
+              </Typography>
+              <Typography variant="body2" gutterBottom color="white">
+                {elemento.description}
+              </Typography>
+              <Typography variant="overline" gutterBottom color="white">
+                Cantidad a comprar: {elemento.quantity}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography sx={{ cursor: 'pointer' }} variant="body2">
+              <Button style={{backgroundColor: "#21b6ae"}} variant="contained" size="medium" onClick={() => deleteProductById(elemento.id)}>Eliminar</Button>
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography variant="subtitle1" component="div" color="white">
+              ${elemento.price}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Paper>
+
             </div>
           );
         })
       }
       </div>
-      <div>
+      <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
         <h3>El precio total del carrito es: AR${precioTotal}</h3>
   
         {cart.length>0 &&(
-          <div>
-          <button variant="contained" onClick={()=>setShowForm(true)}> Terminar la compra </button>
-           <button onClick={clear}> Limpiar Carrito </button>
+          <div style={{justifyContent:"space-between"}}>
+          <Button style={{backgroundColor: "#21b6ae"}} variant="contained" size="medium" onClick={()=>setShowForm(true)}> Terminar la compra </Button>
+           <Button style={{backgroundColor: "#21b6ae"}} variant="contained" size="medium" onClick={clear}> Limpiar Carrito </Button>
            </div>
            )}
            </div>

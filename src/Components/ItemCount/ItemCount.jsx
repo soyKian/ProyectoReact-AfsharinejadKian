@@ -24,13 +24,13 @@ const ItemCount = ({ stock, initial=1, onAdd}) => {
       
         <h2>Añadir {contador} unidad/es</h2>
 
-        <Button variant="contained" size="medium" onClick={sumar}>Sumar</Button>
-        <Button variant="contained" size="medium" onClick={restar}>Restar</Button>
+        <Button style={{backgroundColor: "#21b6ae"}} variant="contained" size="medium" onClick={sumar}>Sumar</Button>
+        <Button style={{backgroundColor: "#21b6ae"}} variant="contained" size="medium" onClick={restar}>Restar</Button>
 
         
       {/* Muestra el botón solo si el stock es mayor a 0 */}
       {stock > 0 && (
-        <Button variant="contained" size="medium" onClick={ ()=> onAdd(contador)}>Agregar al carrito</Button>
+        <Button style={{backgroundColor: "#21b6ae"}} variant="contained" size="medium" onClick={ ()=> onAdd(contador)}>Agregar al carrito</Button>
       )}
       {/* Muestra el mensaje de "sin stock" si el stock es 0 */}
       {stock === 0 && (

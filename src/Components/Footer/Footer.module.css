@@ -1,0 +1,23 @@
+.containerFooter{
+    width: 100%;
+    height: 8vh;
+    background-color: rgb(59,134,134);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+}
+
+.containerContent{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: 'Gloock', serif;
+    font-size: 18px;
+    z-index: 999;
+}
+
+
